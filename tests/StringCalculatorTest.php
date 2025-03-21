@@ -11,8 +11,9 @@ final class StringCalculatorTest extends TestCase
 {
     protected function setUp(): void
     {
-        $this->stringCalculator = new StringCalculator();
         parent::setUp();
+
+        $this->stringCalculator = new StringCalculator();
     }
 
     /**
@@ -20,9 +21,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function givenEmptyStringReturns0()
     {
-        $result = $this->stringCalculator->add("");
-
-        $this->assertEquals(0, $result);
+        $this->assertEquals(0, $this->stringCalculator->add(""));
     }
 
     /**
@@ -30,19 +29,30 @@ final class StringCalculatorTest extends TestCase
      */
     public function givenSingleNumberReturnsNumber()
     {
-        $result = $this->stringCalculator->add("1");
-
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1, $this->stringCalculator->add("1"));
     }
 
     /**
      * @test
      */
-    public function givenTwoNumbersReturnsSum()
+    public function givenTwoNumbersReturnsSumOfNumbers()
     {
-        $result = $this->stringCalculator->add("1,2");
-
-        $this->assertEquals(3, $result);
+        $this->assertEquals(3, $this->stringCalculator->add("1,2"));
     }
 
+    /**
+     * @test
+     */
+    public function givenThreeNumbersReturnsSum()
+    {
+        $this->assertEquals(6, $this->stringCalculator->add("1,2,3"));
+    }
+
+    /**
+     * @test
+     */
+    public function givenStringWithNewLineReturnsSum() :void
+    {
+        $this->assertEquals(6, $this->stringCalculator->add("1\n2,3"));
+    }
 }
